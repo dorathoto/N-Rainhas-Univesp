@@ -8,6 +8,8 @@
 # => quina
 A¹,A²,A³
 
+
+Numero de rainhas sera sempre o numero de N do tabuleiro
 */
 
 namespace NRainhas
@@ -15,14 +17,14 @@ namespace NRainhas
     class Program
     {
         static int[] Tabuleiro;
-        static int n = 4;
+        static readonly int n = 8;     //N rainhas - nxn linhas x colunas
         static int Count = 0;
-        static readonly char[] LetrasTabuleiro = "#ABCDE".ToCharArray();
+        static readonly char[] LetrasTabuleiro = "#ABCDEFGHIJKLM".ToCharArray();
 
         static void Main(string[] args)
         {
-            if (n > 3 && n < 16)
-            {
+           if (n > 3 && n < 16)
+            {//limite pra não transformar em teste de bechamark
                 Tabuleiro = new int[n + 1]; //+1 pq tem a quina do tabuleiro
                 Rainha(1, n);
             }
@@ -37,9 +39,14 @@ namespace NRainhas
                     Tabuleiro[row] = column;    //seta a coluna que a rainha ficará com base na linha do tabuleiro
 
                     if (row == n)
+                    {
+                        //se a linha é igual ao número de colunas, chegou ao final
                         Exibe(n);
+                    }
                     else
+                    {
                         Rainha(row + 1, n);
+                    }
                 }
             }
         }
@@ -83,7 +90,7 @@ namespace NRainhas
                     if (Tabuleiro[i] == j)
                         Console.Write("Q ");
                     else
-                        Console.Write("- ");
+                        Console.Write(". ");
                 }
             }
 
